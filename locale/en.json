@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "title": "Vision model workbench",
+    "description": "Explore multimodal vision analysis inside Harness: model playground, component previews, and API examples.",
+    "detail": "docs/DETAIL.md"
+  },
+  "panel": "Vision model"
+}

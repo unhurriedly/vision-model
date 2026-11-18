@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "title": "视觉模型工作台",
+    "description": "在 Harness 中体验多模态视觉分析：模型测试、前端组件预览与 API 集成示例。",
+    "detail": "docs/DETAIL.md"
+  },
+  "panel": "视觉模型"
+}

@@ -1,0 +1,46 @@
+{
+  "name": "dsh-vision-model",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Vision Model workbench plugin for DeepSeek Harness: model playground, embeddable previews, and API integration examples.",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "index.html",
+    "style.css",
+    "app.js",
+    "scene.svg",
+    "locale/*.json",
+    "docs",
+    "icon.svg",
+    "README.md"
+  ],
+  "scripts": {
+    "check": "node --check app.js && node --check index.js && node --check client.js",
+    "test": "node smoke-test.cjs"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-sidebar"
+      ]
+    }
+  },
+  "devDependencies": {
+    "playwright": "^1.58.0"
+  }
+}
