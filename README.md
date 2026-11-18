@@ -24,44 +24,70 @@
 - 已安装支持插件的 DeepSeek Harness（桌面端或 CLI）。
 - 本仓库为公开仓库，可直接从 GitHub 安装；当前版本为前端原型，不依赖后端服务。
 
-### 方式一：从 GitHub 安装（推荐）
+### 方式一：在 Plugins 中直接填 GitHub 地址（推荐）
 
-如果你的 Harness 提供 `dsh` 命令行：
+不需要克隆仓库：
+
+1. 打开 Harness 左侧的 **Plugins**。
+2. 点击 **Add plugin**；也可以点右侧箭头，选择 **Install a third-party plugin**。
+3. 在包名字段填入：
+
+   ```text
+   git+https://github.com/unhurriedly/vision-model.git
+   ```
+
+4. **Registry** 保持默认即可，点击 **Install**。
+5. 等待安装完成；如果出现 **Enable now**，点击启用。
+6. 左侧边栏出现 **视觉模型**，点击打开工作台。
+
+安装过程由 Harness 的 Plugin Manager 执行，输入框还支持 npm 包名、tarball 和本地绝对路径。
+
+### 方式二：使用 dsh 命令行
 
 ```bash
-dsh plugin --profile web add github:unhurriedly/vision-model
+dsh plugin --profile web add "git+https://github.com/unhurriedly/vision-model.git"
 ```
 
-安装后插件会出现在当前 profile 中，无需手动复制文件。
+- `web` 是 profile 名；桌面端或其他启动方式请替换成实际 profile（可用 `dsh plugin --help` 查看）。
+- 命令执行后刷新 Harness 页面，侧边栏出现 **视觉模型**。
+- 若当前 Harness 没有把 `dsh` 加入 PATH，优先使用方式一。
 
-### 方式二：通过 Plugins 界面安装本地目录
+### 方式三：克隆后从本地目录安装
 
 ```bash
 git clone https://github.com/unhurriedly/vision-model.git
 ```
 
-然后打开 Harness 的 **Plugins**，选择 **Add plugin**，指向克隆下来的 `vision-model` 目录并确认安装。
+然后 **Plugins → Add plugin**，填入克隆目录的绝对路径，例如：
 
-如果使用支持 `install_bundle` 的集成环境，也可以传入该目录的绝对路径。安装完成后，在 **Plugins** 列表中确认「视觉模型」已启用。
+```text
+/Users/you/vision-model
+```
 
-### 方式三：使用源码包
+也可以在支持 `install_bundle` 的环境里传入该绝对路径。安装完成后，在 **Plugins** 列表中确认「视觉模型」已启用。
 
-在 GitHub 仓库页面选择 **Code → Download ZIP**，解压后按方式二选择目录。压缩包包含页面、插件清单、locale、图标与详情文档。
+### 方式四：使用源码包
+
+在 GitHub 仓库页面选择 **Code → Download ZIP**，解压后按方式三选择目录。压缩包包含页面、插件清单、locale、图标与详情文档。
 
 ### 打开工作台
 
 - 安装并启用后，左侧边栏会出现 **视觉模型**；点击即可在主区域打开工作台。
-- 如果侧边栏没有立即出现，刷新 Harness 页面或重新启用插件。
+- 如果侧边栏没有立即出现，刷新 Harness 页面，或在 **Plugins** 中确认插件已启用。
 - 插件页面由宿主提供 `/dsh-vision-model/` 路由；若主区域提示页面未载入，先确认插件已启用，再检查该路由是否可访问。
 
 ### 更新
 
-```bash
-cd vision-model
-git pull
-```
+从 Git 安装的插件不会在 **Plugins** 页面显示版本列表，更新方式是先移除再安装：
 
-然后在 **Plugins** 中重新加载或重装「视觉模型」。只修改 `index.html`、`style.css`、`app.js`、`scene.svg` 时，刷新页面即可；修改 `index.js`、`client.js`、locale 或图标后，需要重新加载插件。
+1. **Plugins** 中找到「视觉模型」，选择移除/卸载；
+2. 重新执行方式一，或使用新的 commit：
+
+   ```text
+   git+https://github.com/unhurriedly/vision-model.git#<40位commit>
+   ```
+
+如果是本地目录安装，执行 `git pull` 后重新加载/重装插件即可。只修改 `index.html`、`style.css`、`app.js`、`scene.svg` 时，刷新页面即可；修改 `index.js`、`client.js`、locale 或图标后，需要重新加载插件。
 
 ### 卸载
 
