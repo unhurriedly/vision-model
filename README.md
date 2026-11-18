@@ -93,6 +93,14 @@ git clone https://github.com/unhurriedly/vision-model.git
 
 在 **Plugins** 中找到「视觉模型」并移除即可；不会影响其他插件或 Harness 配置。
 
+### 安装失败排查
+
+- **提示 Cannot access GitHub / GitHub connection timed out**：Git 安装要求 Harness 所在机器能访问 `github.com:443`。可配置代理后重试，或改用 **Code → Download ZIP** 下载源码，再通过本地目录安装。
+- **提示不是 bundle / not a bundle**：确认 `package.json` 声明了 `dsh.bundle`；本项目已包含，通常是把目录指错到了子目录。
+- **安装成功但侧边栏没有「视觉模型」**：在 **Plugins** 中确认插件已启用，然后刷新 Harness 页面。
+- **主区域页面空白或提示页面未载入**：确认插件已启用，并检查 `/dsh-vision-model/` 路由；重新启用插件或重启 Harness 后再试。
+- **页面能打开但字体不对**：Google Fonts 被网络拦截时会回退到系统字体，不影响功能。
+
 ## 验证
 
 ```sh
